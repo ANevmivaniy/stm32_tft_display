@@ -766,9 +766,9 @@ static void MX_GPIO_Init(void)
  8000720:	f000 ff40 	bl	80015a4 <HAL_GPIO_WritePin>
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_1, GPIO_PIN_RESET);
  8000724:	2200      	movs	r2, #0
- 8000726:	211c      	movs	r1, #28
+ 8000726:	210e      	movs	r1, #14
  8000728:	4867      	ldr	r0, [pc, #412]	; (80008c8 <MX_GPIO_Init+0x26c>)
  800072a:	f000 ff3b 	bl	80015a4 <HAL_GPIO_WritePin>
 
@@ -837,9 +837,9 @@ static void MX_GPIO_Init(void)
  800078a:	484f      	ldr	r0, [pc, #316]	; (80008c8 <MX_GPIO_Init+0x26c>)
  800078c:	f000 fd6e 	bl	800126c <HAL_GPIO_Init>
 
-  /*Configure GPIO pins : PA2 PA3 PA4 */
-  GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4;
- 8000790:	231c      	movs	r3, #28
+  /*Configure GPIO pins : PA2 PA3 PA1 */
+  GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_1;
+ 8000790:	230e      	movs	r3, #14
  8000792:	61fb      	str	r3, [r7, #28]
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
  8000794:	2301      	movs	r3, #1
