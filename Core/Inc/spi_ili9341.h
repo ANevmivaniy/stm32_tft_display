@@ -3,7 +3,6 @@
 #define __SPI_ILI9341_H
 //-------------------------------------------------------------------
 #include "stm32f4xx_hal.h"
-
 //-------------------------------------------------------------------
 #define RESET_ACTIVE() HAL_GPIO_WritePin(GPIOA,GPIO_PIN_2,GPIO_PIN_RESET)
 #define RESET_IDLE() HAL_GPIO_WritePin(GPIOA,GPIO_PIN_2,GPIO_PIN_SET)
@@ -33,12 +32,11 @@
 #define swap(a,b) {int16_t t=a;a=b;b=t;}
 //-------------------------------------------------------------------
 
+
 void TFT9341_ini(uint16_t w_size, uint16_t h_size);
 void TFT9341_FillRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);
 void TFT9341_FillScreen(uint16_t color);
 uint16_t TFT9341_RandColor(void);
 void TFT9341_DrawPixel(int x, int y, uint16_t color);
 void TFT9341_DrawArray(uint16_t array[], int x, int y);
-
-
 #endif /* __SPI_ILI9341_H */
