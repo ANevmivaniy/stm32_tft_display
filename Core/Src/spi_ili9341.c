@@ -13,18 +13,21 @@ uint16_t not(uint16_t a) {
 void TFT9341_SendCommand(uint8_t cmd)
 {
   DC_COMMAND();
-  HAL_SPI_Transmit (&hspi1, &cmd, 1, 5000);
+  //HAL_Delay(1);
+  HAL_SPI_Transmit (&hspi1, &cmd, 1, HAL_MAX_DELAY);
 }
 //-------------------------------------------------------------------
 //-------------------------------------------------------------------
 void TFT9341_SendData(uint8_t dt)
 {
 	DC_DATA();
-	HAL_SPI_Transmit (&hspi1, &dt, 1, 5000);
+	HAL_Delay(5);
+	HAL_SPI_Transmit (&hspi1, &dt, 1, HAL_MAX_DELAY);
 }
 //-------------------------------------------------------------------
 static void TFT9341_WriteData(uint8_t* buff, size_t buff_size) {
 	DC_DATA();
+	//HAL_Delay(5);
 	while(buff_size > 0) {
 		uint16_t chunk_size = buff_size > 32768 ? 32768 : buff_size;
 		HAL_SPI_Transmit(&hspi1, buff, chunk_size, HAL_MAX_DELAY);
@@ -71,6 +74,7 @@ void TFT9341_FillRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16
   TFT9341_SetAddrWindow(x1, y1, x2, y2);
   uint8_t data[] = { color >> 8, color & 0xFF };
   DC_DATA();
+  //HAL_Delay(5);
   for(uint32_t i = 0; i < (x2-x1+1)*(y2-y1+1); i++)
   {
       HAL_SPI_Transmit(&hspi1, data, 2, HAL_MAX_DELAY);
@@ -173,17 +177,28 @@ void TFT9341_ini(uint16_t w_size, uint16_t h_size)
 	  data[2] = 0x30;
 	  TFT9341_SendCommand(0xCF);
 	  TFT9341_WriteData(data, 3);
-	  //Driver timing control A
-	  data[0] = 0x85;
-	  data[1] = 0x00;
-	  data[2] = 0x78;
-	  TFT9341_SendCommand(0xE8);
-	  TFT9341_WriteData(data, 3);
-	  //Driver timing control B
-	  data[0] = 0x00;
-	  data[1] = 0x00;
-	  TFT9341_SendCommand(0xEA);
-	  TFT9341_WriteData(data, 2);
+//	  //Driver timing control A
+//	  data[0] = 0x85;
+//	  data[1] = 0x00;
+//	  data[2] = 0x78;
+//	  TFT9341_SendCommand(0xE8);
+//	  TFT9341_WriteData(data, 3);
+//	  //Driver timing control B
+//	  data[0] = 0x00;
+//	  data[1] = 0x00;
+//	  TFT9341_SendCommand(0xEA);
+//	  TFT9341_WriteData(data, 2);
+	  	  //Driver timing control A
+	  	  data[0] = 0x84;
+	  	  data[1] = 0x11;
+	  	  data[2] = 0x7A;
+	  	  TFT9341_SendCommand(0xE8);
+	  	  TFT9341_WriteData(data, 3);
+	  	  //Driver timing control B
+	  	  data[0] = 0x66;
+	  	  data[1] = 0x00;
+	  	  TFT9341_SendCommand(0xEA);
+	  	  TFT9341_WriteData(data, 2);
 	  //Power on Sequence control
 	  data[0] = 0x64;
 	  data[1] = 0x03;
@@ -234,6 +249,7 @@ void TFT9341_ini(uint16_t w_size, uint16_t h_size)
 	  data[0] = 0x08;
 	  data[1] = 0x82;
 	  data[2] = 0x27;//320 строк
+	  //data[2] = 0x13;//320 строк
 	  TFT9341_SendCommand(0xB6);
 	  TFT9341_WriteData(data, 3);
 	  //Enable 3G (пока не знаю что это за режим)

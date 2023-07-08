@@ -6,6 +6,7 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../Core/Src/main.c \
+../Core/Src/ov7670.c \
 ../Core/Src/spi_ili9341.c \
 ../Core/Src/stm32f4xx_hal_msp.c \
 ../Core/Src/stm32f4xx_it.c \
@@ -15,6 +16,7 @@ C_SRCS += \
 
 C_DEPS += \
 ./Core/Src/main.d \
+./Core/Src/ov7670.d \
 ./Core/Src/spi_ili9341.d \
 ./Core/Src/stm32f4xx_hal_msp.d \
 ./Core/Src/stm32f4xx_it.d \
@@ -24,6 +26,7 @@ C_DEPS += \
 
 OBJS += \
 ./Core/Src/main.o \
+./Core/Src/ov7670.o \
 ./Core/Src/spi_ili9341.o \
 ./Core/Src/stm32f4xx_hal_msp.o \
 ./Core/Src/stm32f4xx_it.o \
